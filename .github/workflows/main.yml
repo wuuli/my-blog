@@ -44,6 +44,6 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          port: ${{ secrets.PORT }}
-         source: "./next"
+         source: "./.next"
          target: "/home/build/my-blog"
          rm: true
