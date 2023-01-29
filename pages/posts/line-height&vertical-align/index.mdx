@@ -1,0 +1,38 @@
+import manifest from './manifest.json'
+import PostLayout from '../../../components/PostLayout'
+import {
+  InlineBoxHeightTest
+} from '../../../components/InlineBoxHeightTest'
+
+## 1. 背景
+
+之前在写需求的时候发现类似于如下布局的 box，虽然给 img 设置了 `vertical-align: middle`，但是图片并没有真正地在灰色 div 的第一行中居中，而是稍微偏下，这导致了这一行的行高并不是 `line-height` 的值，而是比 `line-height` 的值稍微大一点。自己基础知识掌握得不牢靠，费了一些功夫解决了这个问题。
+
+<InlineBoxHeightTest />
+
+## 2. 内联盒模型
+
+### 2.1 内联级元素（Inline-level elements） 和内联盒子（inline boxes）
+
+CSS 2.2 中提到
+
+> Inline-level elements are those elements of the source document that do not form new blocks of content; the content is distributed in lines (e.g., emphasized pieces of text within a paragraph, inline images, etc.). The following values of the 'display' property make an element inline-level: 'inline', 'inline-table', and 'inline-block'. Inline-level elements generate inline-level boxes, which are boxes that participate in an inline formatting context.
+>
+> An inline box is one that is both inline-level and whose contents participate in its containing inline formatting context. A non-replaced element with a 'display' value of 'inline' generates an inline box. Inline-level boxes that are not inline boxes (such as replaced inline-level elements, inline-block elements, and inline-table elements) are called atomic inline-level boxes because they participate in their inline formatting context as a single opaque box.
+
+内联级元素就是不会形成新块级盒子的元素，其内容能够分散在多行，例如 `<span>`、 `<em>` 以及 `<strong>` 。能让一个元素成为内联级元素的 `display` 属性的值有 `inline`、`inline-table` 和 `inline-block`。
+
+我们需要先来讲下内联盒模型，
+
+## 3. 行高的计算
+
+
+## 4. 参考文档
+
+[CSS 2.2](https://www.w3.org/TR/CSS22/visuren.html#visual-model-intro)
+
+export default ({ children }) => {
+  return (
+    <PostLayout date={manifest.date} title={manifest.title}>{children}</PostLayout>
+  )
+}
